@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased text-foreground;
+    background: linear-gradient(to bottom, #0f1116, #151823);
+  }
+}
+
+/* Градиентный текст */
+.gradient-text {
+  background: linear-gradient(90deg, #7928ca, #3b82f6, #10b981);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 300% 100%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Фоновые эффекты и декоративные элементы */
+.card {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #7928ca, transparent, #3b82f6, transparent, #10b981);
+  background-size: 400% 400%;
+  z-index: -1;
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  animation: gradientBorder 12s ease-in-out infinite;
+}
+
+.card:hover::before {
+  opacity: 0.5;
+}
+
+/* Анимации и кнопки */
+.glow-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(121, 40, 202, 0.3);
+}
+
+.glow-button:hover {
+  box-shadow: 0 0 15px rgba(121, 40, 202, 0.6), 0 0 30px rgba(121, 40, 202, 0.3);
+  transform: translateY(-2px);
+}
+
+.neon-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #7928ca, #3b82f6, #10b981, transparent);
+  box-shadow: 0 0 10px rgba(121, 40, 202, 0.5);
+}
+
+/* Анимация парящего эффекта */
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+/* Фоновые частицы */
+.crypto-particle {
+  position: absolute;
+  opacity: 0.5;
+  animation: particle-float 20s linear infinite;
+}
+
+/* Определение анимаций */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 2px rgba(121, 40, 202, 0.2)); }
+  to { filter: drop-shadow(0 0 8px rgba(121, 40, 202, 0.8)); }
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(var(--x, 100px), var(--y, -100px)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes gradientBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+  .card::before {
+    filter: blur(5px);
+  }
+}
